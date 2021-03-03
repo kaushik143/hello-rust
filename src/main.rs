@@ -24,7 +24,7 @@ async fn main() -> std::io::Result<()> {
         .data(StarWars::new())
         .finish();
 
-    println!("Playground: http://localhost:8000");
+    println!("Playground: http://0.0.0.0:8080");
 
     HttpServer::new(move || {
         App::new()
@@ -32,7 +32,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/").guard(guard::Post()).to(index))
             .service(web::resource("/").guard(guard::Get()).to(index_playground))
     })
-    .bind("127.0.0.1:8000")?
+    .bind("0.0.0.0:8080")?
     .run()
     .await
 }
